@@ -51,9 +51,7 @@ aws configure
 eksctl create cluster --name demo-cluster --region us-east-1 --fargate
 <img width="982" height="981" alt="Screenshot 2025-08-22 110726" src="https://github.com/user-attachments/assets/6aed1659-b15a-4a68-acfc-831bf4e100b9" />
 
-
-
- 3. Configure OIDC Provider
+3. Configure OIDC Provider
 
 
 export cluster_name=demo-cluster
@@ -61,8 +59,7 @@ oidc_id=$(aws eks describe-cluster --name $cluster_name --query "cluster.identit
 <img width="969" height="616" alt="Screenshot 2025-08-22 220541" src="https://github.com/user-attachments/assets/be1842b9-6df5-4a92-a0fa-de6dca73404f" />
 
 
-
- 4. Create Fargate Profile for Namespace
+4. Create Fargate Profile for Namespace
 
 
 eksctl create fargateprofile \
@@ -72,7 +69,7 @@ eksctl create fargateprofile \
     --namespace game-2048
 
 
- 5. Deploy Application
+5. Deploy Application
 
 
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/examples/2048/2048_full.yaml
@@ -80,7 +77,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-load-bala
 
 
 
- 6. Create IAM Policy and Integrate with Service Account
+6. Create IAM Policy and Integrate with Service Account
 
 
 curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.11.0/docs/install/iam_policy.json
@@ -97,7 +94,6 @@ eksctl create iamserviceaccount \
   --attach-policy-arn=arn:aws:iam::<your-aws-account-id>:policy/AWSLoadBalancerControllerIAMPolicy \
   --approve
 <img width="1150" height="974" alt="Screenshot 2025-08-22 110708" src="https://github.com/user-attachments/assets/1e00a7af-2996-4e46-bdcb-d9665d3c55c4" />
-
 
 7. Deploy ALB Ingress Controller
 
